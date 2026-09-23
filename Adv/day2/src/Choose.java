@@ -1,41 +1,37 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Choose {
-    public static final int MAX_N = 10;
-    
-    public static int n, m;
-    public static int[] ranges = new int[MAX_N + 1];
+public class Main {
+    static int N;
+    static int M;
 
-    public static void printNumber() {
-        for(int i = 0; i < m; i++) {
-            System.out.print(ranges[i] + " ");
-        }
-        System.out.println();
-    }
-
-    public static void choose(int curr, int selected) {
-        if(selected == m) {
-            printNumber();
+    static void choose(int N, int M, ArrayList<Integer> L){
+        if(L.size() == M){
+            for(int i=0; i<L.size();i++){
+                System.out.print(L.get(i)+" ");
+            }
+            System.out.println();
             return;
         }
+        int start = 1;
         
-        if(curr == n + 1) {
-            return;
+        if(L.size() > 0){
+            start = L.get(L.size()-1)+1;
         }
 
-        // 1. curr을 선택하는 경우
-        ranges[selected] = curr;
-        choose(curr + 1, selected + 1);
-
-        // 2. curr을 선택하지 않는 경우
-        choose(curr + 1, selected);
-    }    
+        for(int i=start; i<N+1; i++){
+            L.add(i);
+            choose(N,M,L);
+            L.remove(L.size()-1);
+        }
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        m = sc.nextInt();
-        
-        choose(1, 0);
+        N = sc.nextInt();
+        M = sc.nextInt();
+        // Please write your code here.
+        ArrayList<Integer> L = new ArrayList<>();
+        choose(N,M,L);
     }
 }
