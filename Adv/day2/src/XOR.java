@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
+public class XOR {
 
     static ArrayList<ArrayList<Integer>> List = new ArrayList<>();
 ////////////////////////////////////////////////////////////////
