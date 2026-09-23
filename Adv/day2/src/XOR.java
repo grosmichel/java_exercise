@@ -1,44 +1,67 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class XOR {
-    public static final int MAX_N = 20;
+public class Main {
 
-    public static int[] ranges = new int[MAX_N + 1];
-    public static int[] numbers =  new int[MAX_N + 1];
+    static ArrayList<ArrayList<Integer>> List = new ArrayList<>();
+////////////////////////////////////////////////////////////////
 
-    public static int n, m;
+static void choose(int N, int M, ArrayList<Integer> L){
+        if(L.size() == M){
 
-    public static int ans = 0;
-
-    public static void choose(int currIdx, int selected, int total) {
-        if(selected == m) {
-            ans = Math.max(ans, total);
+            // 새로 복사 해서 add해라. 안그럼 복사 오류난다..
+            List.add(new ArrayList<>(L));
             return;
         }
-
-        if(currIdx >= n) {
-            return;
+        int start = 0;
+        
+        if(L.size() > 0){
+            start = L.get(L.size()-1);
         }
 
-        // 1번 currIdx를 선택했을 때
-        ranges[selected] = numbers[currIdx];
-        choose(currIdx + 1, selected + 1, total^numbers[currIdx]);
+        for(int i=start; i<N; i++){
+            L.add(i);
+            choose(N,M,L);
+            L.remove(L.size()-1);
+        }
+    }
+////////////////////////////////////////////////////////////////
 
-        // 2번 currIdx 선택하지 않았을 때
-        choose(currIdx + 1, selected, total);
+    static int max_xor(int N, int M, int[] A){
+
+        int max = 0;
+
+        choose(N,M,new ArrayList<>());
+
+        for(int i=0; i<List.size();i++){
+
+            ArrayList<Integer> temp = List.get(i);
+            int[] temp2 = new int[M];
+
+            for(int j=0;j<M;j++){
+                temp2[j] = A[temp.get(j)];
+            }
+
+            int xor = temp2[0];
+
+            for(int j=1;j<M;j++){
+                xor ^= temp2[j];
+            }
+
+            max = Math.max(max,xor);
+        }
+        return max;
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        m = sc.nextInt();
-        
-        for (int i = 0; i < n; i++) {
-            numbers[i] = sc.nextInt();
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
         }
-        
-        choose(0, 0, 0);
-
-        System.out.println(ans);
+        // Please write your code here.
+        System.out.println(max_xor(N,M,A));
     }
 }
