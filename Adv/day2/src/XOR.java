@@ -6,7 +6,7 @@ public class XOR {
     static ArrayList<ArrayList<Integer>> List = new ArrayList<>();
 ////////////////////////////////////////////////////////////////
 
-static void choose(int N, int M, ArrayList<Integer> L){
+    static void choose(int N, int M, ArrayList<Integer> L){
         if(L.size() == M){
 
             // 새로 복사 해서 add해라. 안그럼 복사 오류난다..
