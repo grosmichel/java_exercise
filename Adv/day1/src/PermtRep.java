@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DuplPermt {
+public class PermtRep {
 
     static void sol(int K, int N, ArrayList<Integer> L) {
 
