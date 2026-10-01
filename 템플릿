@@ -1,0 +1,15 @@
+import java.util.Scanner;
+import java.io.FileInputStream;
+
+class Solution {
+
+    public static void main(String args[]) throws Exception {
+        System.setIn(new FileInputStream("Live/1001/src/sample_input.txt"));
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        for(int tc=1;tc<=T;tc++){
+
+            System.out.println("#"+tc+" ");
+        }
+    }
+}
