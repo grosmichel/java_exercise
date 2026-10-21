@@ -9,7 +9,7 @@ class QuickSort {
     static int save_b;
 
     static void sort_a(int start, int end){
-
+        return;
     }
 
     public static void main(String args[]) throws Exception {
